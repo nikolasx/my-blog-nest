@@ -1,9 +1,13 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { HttpService, Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
 export class RedirectMiddleware implements NestMiddleware {
-  public use(req: Request, res: Response, next: NextFunction): void {
+  public constructor(
+    private readonly httpService: HttpService,
+  ) {}
+
+  public async use(req: Request, res: Response, next: NextFunction): Promise<void> {
     const baseUrl = req.baseUrl;
     const reg = /(\.js|css|png)|^\/api/;
     if (reg.test(baseUrl)) {
@@ -11,9 +15,8 @@ export class RedirectMiddleware implements NestMiddleware {
       next();
     } else {
       res.setHeader('Content-Type', 'text/html');
-      res.render('index', {
-        html: 'http://localhost:9000/index.html',
-      });
+      const html = await this.httpService.get('http://localhost:9000/index.html').toPromise();
+      res.send(html.data);
     }
   }
 }
