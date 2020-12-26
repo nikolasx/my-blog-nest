@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 export const baseConfig: Configuration = {
   entry: {
-    main: resolve(__dirname, '..', 'src/client/main.ts'),
+    main: resolve(__dirname, '..', 'src/client/main.tsx'),
   },
   output: {
     path: resolve(__dirname, '..', 'dist/static'),
@@ -25,5 +25,8 @@ export const baseConfig: Configuration = {
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.json', '.js', '.jsx'],
   },
 };

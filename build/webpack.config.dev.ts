@@ -9,8 +9,12 @@ const config: Configuration = mergeDeepWith(concat, baseConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       template: resolve(__dirname, '..', 'src/client/index.ejs'),
+      filename: 'index.ejs',
     }),
   ],
+  output: {
+    publicPath: 'http://localhost:9000',
+  },
   devServer: {
     contentBase: resolve(__dirname, '..', 'dist/static'),
     port: 9000,
