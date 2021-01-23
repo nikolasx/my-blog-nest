@@ -1,7 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { routers } from '@client/constant/router';
 import { Login } from '@client/pages/login';
+import { Register } from '@client/pages/register';
 
 export const Container: React.FC = () => {
   return (
@@ -10,9 +16,13 @@ export const Container: React.FC = () => {
         <Route exact path={routers.home}>
           <div>home</div>
         </Route>
-        <Route path={routers.login}>
+        <Route exact path={routers.login}>
           <Login />
         </Route>
+        <Route exact path={routers.register}>
+          <Register />
+        </Route>
+        <Redirect to={routers.login} />
       </Switch>
     </Router>
   );

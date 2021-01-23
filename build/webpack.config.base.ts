@@ -1,3 +1,10 @@
+/*
+ * @Author: g05047
+ * @Date: 2020-12-24 22:13:02
+ * @LastEditors: g05047
+ * @LastEditTime: 2021-01-23 23:22:01
+ * @Description: file content
+ */
 import { Configuration } from 'webpack';
 import { resolve } from 'path';
 
@@ -41,6 +48,12 @@ export const baseConfig: Configuration = {
             loader: 'less-loader',
           },
         ],
+      },
+      {
+        test: /\.(jpe?g|jpg|png)$/,
+        use: {
+          loader: 'url-loader',
+        },
       },
     ],
   },
