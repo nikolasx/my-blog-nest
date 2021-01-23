@@ -1,10 +1,3 @@
-/*
- * @Author: g05047
- * @Date: 2020-12-27 00:27:41
- * @LastEditors: g05047
- * @LastEditTime: 2021-01-23 23:34:35
- * @Description: file content
- */
 import { Button, Card, Checkbox, Form, Input } from 'antd';
 import React from 'react';
 import styles from './login.module.less';

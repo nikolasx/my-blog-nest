@@ -16,6 +16,7 @@
     "paths": {
       "@module/*": ["src/module/*"],
       "@client/*": ["src/client/*"],
+      "@hooks/*": ["src/client/hooks"],
     }
   },
 }

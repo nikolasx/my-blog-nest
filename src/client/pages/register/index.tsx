@@ -1,5 +1,8 @@
-import { Button, Form, Input } from 'antd';
-import React from 'react';
+import { Api } from '@client/constant/api';
+import { useApi } from '@client/hooks/useApi';
+import { Button, Form, Input, message } from 'antd';
+import React, { useCallback } from 'react';
+import { from } from 'rxjs';
 import styles from './register.module.less';
 
 const layout = {
@@ -12,6 +15,27 @@ const tailLayout = {
 
 export const Register: React.FC = () => {
   const [form] = Form.useForm();
+  const { apiFetcher } = useApi();
+
+  const handleRegister = useCallback(() => {
+    from(form.validateFields()).subscribe(
+      (res) => {
+        // 用户填写成功
+        apiFetcher<{
+          code: number;
+          message: string;
+        }>(Api.USER_REGISTER, {
+          method: 'POST',
+          body: JSON.stringify(res),
+        }).subscribe(([status, data]) => {
+          if (status === 201 && data.code === 0) {
+            message.success(data.message);
+          }
+        });
+      },
+      () => console.log('validate fail'),
+    );
+  }, []);
   return (
     <div>
       <h2>欢迎注册李雄个人博客系统</h2>
@@ -24,10 +48,6 @@ export const Register: React.FC = () => {
               {
                 type: 'email',
                 message: '请输入正确的邮箱地址！',
-              },
-              {
-                required: true,
-                message: '请输入邮箱地址!',
               },
             ]}
           >
@@ -73,7 +93,9 @@ export const Register: React.FC = () => {
             <Input.Password />
           </Form.Item>
           <Form.Item {...tailLayout}>
-            <Button type="primary">注册</Button>
+            <Button type="primary" onClick={handleRegister}>
+              注册
+            </Button>
           </Form.Item>
         </Form>
       </div>
