@@ -10,7 +10,7 @@
     "build": "nest build",
     "build:client": "webpack --config build/webpack.config.prod.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start src/main.ts",
+    "start": "nest start src/server/main.ts",
     "start:server": "nest start src/main.ts",
     "start:client": "webpack-dev-server --config build/webpack.config.dev.ts",
     "start:dev": "concurrently -n client,server npm:start:client nodemon",
