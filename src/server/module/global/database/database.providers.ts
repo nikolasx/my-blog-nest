@@ -9,7 +9,7 @@ export const databaseProviders = [
         host: 'localhost',
         port: 3306,
         username: 'root',
-        password: 'password',
+        password: '88888888',
         database: 'db_myblog',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
